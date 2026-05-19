@@ -1,0 +1,14 @@
+# Archivos de sesión de Claude Code (conversaciones locales)
+*.jsonl
+
+# Configuración local de permisos (no es parte del sistema compartible)
+.claude/settings.local.json
+
+# Archivos temporales de Windows
+Thumbs.db
+desktop.ini
+*.tmp
+~$*
+
+# Mac
+.DS_Store

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Informe Financiero Anual — TransLogística del Norte S.A.S. — 2024</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  :root {
+    --verde: #16a34a;
+    --amarillo: #eab308;
+    --rojo: #dc2626;
+    --azul: #1e3a8a;
+    --dorado: #b45309;
+    --gris-claro: #f9fafb;
+    --gris-medio: #6b7280;
+    --gris-oscuro: #111827;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: 'Georgia', 'Segoe UI', serif; margin: 0; color: var(--gris-oscuro); line-height: 1.7; }
+  .cover {
+    background: linear-gradient(180deg, var(--azul) 0%, #1e1b4b 100%);
+    color: white; padding: 100px 60px; text-align: center;
+  }
+  .cover h1 { font-size: 42px; margin: 0 0 10px; letter-spacing: 1px; }
+  .cover .subtitle { font-size: 22px; opacity: 0.9; }
+  .cover .empresa { font-size: 30px; margin-top: 60px; color: #fcd34d; }
+  .cover .meta { margin-top: 80px; font-size: 14px; opacity: 0.7; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 60px; }
+  h2 { color: var(--azul); border-bottom: 3px double var(--dorado); padding-bottom: 10px; margin-top: 50px; font-size: 26px; }
+  h3 { color: var(--gris-oscuro); margin-top: 32px; font-size: 18px; }
+  .capa-1 { background: var(--gris-claro); padding: 36px; border-radius: 12px; margin-bottom: 40px; border-top: 6px solid var(--dorado); }
+  .mensaje-clave { background: linear-gradient(135deg, var(--azul) 0%, #312e81 100%); color: white; padding: 30px; border-radius: 12px; margin-bottom: 28px; }
+  .mensaje-clave h2 { color: #fcd34d; margin: 0 0 12px; border: none; padding: 0; font-size: 18px; }
+  .mensaje-clave p { font-size: 20px; line-height: 1.5; margin: 0; }
+  .hallazgos li { margin-bottom: 12px; font-size: 16px; }
+  .semaforos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px; margin: 24px 0; }
+  .semaforo-card { background: white; border-radius: 8px; padding: 20px; border-left: 6px solid; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .semaforo-card.verde { border-left-color: var(--verde); }
+  .semaforo-card.amarillo { border-left-color: var(--amarillo); }
+  .semaforo-card.rojo { border-left-color: var(--rojo); }
+  .semaforo-card .nombre { font-size: 12px; color: var(--gris-medio); text-transform: uppercase; letter-spacing: 0.5px; }
+  .semaforo-card .valor { font-size: 28px; font-weight: bold; margin: 8px 0; color: var(--azul); }
+  .semaforo-card .interpretacion { font-size: 13px; color: var(--gris-medio); }
+  .recomendaciones { background: #fef3c7; padding: 24px; border-radius: 8px; border-left: 6px solid var(--dorado); margin-top: 20px; }
+  .recomendaciones h3 { margin-top: 0; color: #92400e; }
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
+  th { background: var(--azul); color: white; padding: 12px; text-align: left; }
+  td { padding: 10px; border-bottom: 1px solid #e5e7eb; }
+  tr:hover { background: var(--gris-claro); }
+  .chart-container { margin: 26px 0; padding: 24px; background: var(--gris-claro); border-radius: 8px; }
+  .chart-container canvas { max-height: 320px; }
+  .chart-conclusion { margin-top: 12px; font-style: italic; color: var(--gris-medio); font-size: 14px; }
+  .seccion-estrategica { background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%); color: white; padding: 36px; border-radius: 12px; margin: 30px 0; }
+  .seccion-estrategica h3 { color: #fcd34d; margin-top: 0; }
+  .anexo { background: var(--gris-claro); border: 2px dashed var(--gris-medio); padding: 24px; border-radius: 8px; margin-top: 50px; }
+  .alerta-roja { background: #fee2e2; border-left: 6px solid var(--rojo); padding: 20px; border-radius: 8px; margin: 20px 0; }
+  .alerta-roja strong { color: var(--rojo); }
+  .footer { background: var(--gris-oscuro); color: white; padding: 24px 60px; font-size: 12px; text-align: center; }
+  @media print { .cover { page-break-after: always; } .container { padding: 30px; } h2 { page-break-after: avoid; } }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="subtitle">Informe Financiero Anual</div>
+  <h1>2024</h1>
+  <div class="empresa">TransLogística del Norte S.A.S.</div>
+  <div class="meta">
+    NIT 901.234.567-8 · Sector Transporte de Carga · Bogotá, Colombia<br>
+    Emitido: 13 de mayo de 2026<br>
+    Sistema Analítico Financiero — Multi-Agente
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ===================== CAPA 1: RESUMEN EJECUTIVO ===================== -->
+  <h2>1. Resumen Ejecutivo</h2>
+
+  <div class="mensaje-clave">
+    <h2>EN UNA FRASE</h2>
+    <p>La empresa creció en ventas pero perdió rentabilidad y liquidez — está operando con plata prestada de proveedores, tiene un 28% de su flota subutilizada, y un proyecto bien diseñado para aprovechar esa capacidad podría agregar $579 millones de valor.</p>
+  </div>
+
+  <div class="capa-1">
+    <h3>5 hallazgos clave del año</h3>
+    <ul class="hallazgos">
+      <li><strong>Ventas crecieron 7.3%</strong> pero los costos crecieron más rápido (10%): cada $100 vendidos en 2024 dejaron $5.2 de ganancia limpia, frente a $6.7 del año anterior.</li>
+      <li><strong>La caja del negocio (EBITDA)</strong> cayó de $1.005M a $965M (–4%), mientras los gastos financieros del banco subieron 11.4%.</li>
+      <li><strong>La empresa está operando con capital de trabajo negativo</strong> de –$220M: por cada $1 que debe pagar en menos de un año, solo tiene $0.86 — necesita refinanciar o capitalizar.</li>
+      <li><strong>El 28% de la flota está sin usar</strong>, lo que cuesta $412M al año en costos fijos pagados sin producir ingresos — esto equivale al 165% de la utilidad neta del año.</li>
+      <li><strong>El termómetro de quiebra (Z-Score)</strong> está en 1.75 — zona gris, ya no es zona segura. Sin acción correctiva, podría empeorar.</li>
+    </ul>
+
+    <h3>Tablero de salud financiera</h3>
+    <div class="semaforos">
+      <div class="semaforo-card rojo">
+        <div class="nombre">Razón Corriente</div>
+        <div class="valor">0.86</div>
+        <div class="interpretacion">Por cada $1 que debe a corto plazo, tiene solo $0.86 para pagarlo</div>
+      </div>
+      <div class="semaforo-card rojo">
+        <div class="nombre">Capital de Trabajo</div>
+        <div class="valor">−$220M</div>
+        <div class="interpretacion">Negativo y empeorando vs. 2023 (−$150M)</div>
+      </div>
+      <div class="semaforo-card amarillo">
+        <div class="nombre">Margen Neto</div>
+        <div class="valor">5.2%</div>
+        <div class="interpretacion">Cae desde 6.7% en 2023</div>
+      </div>
+      <div class="semaforo-card amarillo">
+        <div class="nombre">ROE (Rentab. Socios)</div>
+        <div class="valor">10.5%</div>
+        <div class="interpretacion">Apenas supera un CDT — sin compensar el riesgo</div>
+      </div>
+      <div class="semaforo-card rojo">
+        <div class="nombre">Cobertura Intereses</div>
+        <div class="valor">2.4x</div>
+        <div class="interpretacion">La utilidad cubre solo 2.4 veces el pago al banco</div>
+      </div>
+      <div class="semaforo-card verde">
+        <div class="nombre">Margen Contribución</div>
+        <div class="valor">43.1%</div>
+        <div class="interpretacion">Por cada $100 vendidos, $43 aportan al fondo común</div>
+      </div>
+      <div class="semaforo-card amarillo">
+        <div class="nombre">Capacidad Utilizada</div>
+        <div class="valor">72%</div>
+        <div class="interpretacion">28% de la flota está ociosa</div>
+      </div>
+      <div class="semaforo-card amarillo">
+        <div class="nombre">Z-Score Quiebra</div>
+        <div class="valor">1.75</div>
+        <div class="interpretacion">Zona gris (segura: &gt;2.6)</div>
+      </div>
+    </div>
+
+    <div class="recomendaciones">
+      <h3>Plan recomendado</h3>
+      <p><strong>En 30 días:</strong> Renegociar plazos con los 5 clientes más grandes para reducir los días de cobro de 64 a 45 (libera ~$250M de capital de trabajo). Refinanciar la deuda financiera de corto plazo ($720M) a largo plazo para aliviar liquidez.</p>
+      <p><strong>En 60 días:</strong> Definir plan comercial agresivo para llevar la utilización de flota del 72% al 85% — esto recupera ~$200M de los $412M perdidos hoy en capacidad ociosa.</p>
+      <p><strong>En 90 días:</strong> Decidir sobre la inversión en 3 vehículos adicionales (VPN +$579M, TIR 22%) — pero solo si se alcanza el 85% de utilización en la flota actual primero. Designar revisor fiscal (la empresa cumple umbrales y la ausencia es bandera de cumplimiento).</p>
+    </div>
+  </div>
+
+  <!-- ===================== CAPA 2: ANÁLISIS DETALLADO ===================== -->
+  <h2>2. Análisis Financiero Detallado</h2>
+
+  <h3>2.1. Liquidez y Capital de Trabajo</h3>
+  <p>La empresa tiene un problema serio de liquidez. La razón corriente (lo que tiene para pagar lo que debe a menos de un año) bajó a 0.86 — eso significa que <strong>si mañana tuviera que pagar todas las obligaciones del año, no le alcanzaría</strong>. Está operando con financiación de proveedores y deuda bancaria.</p>
+  <p>El ciclo del dinero se alargó: los clientes pagan a 64 días en promedio (10 días más que en 2023), mientras la empresa paga a proveedores a 41 días. Eso significa que durante 23 días la empresa pone plata de su bolsillo para financiar a los clientes.</p>
+  <div class="chart-container">
+    <canvas id="chartLiquidez"></canvas>
+    <div class="chart-conclusion">La razón corriente lleva 2 años en zona de alerta, sin recuperación.</div>
+  </div>
+
+  <h3>2.2. Rentabilidad</h3>
+  <p>La utilidad neta cayó 17.2% pese a que las ventas crecieron 7.3%. La causa principal: los costos del servicio (combustible, llantas, mantenimiento, conductores) crecieron 10% — más rápido que los ingresos. Esto se conoce como <em>erosión de márgenes</em>.</p>
+  <p>En términos llanos: <strong>de cada $100 vendidos en 2023 quedaban $6.70 de ganancia limpia; en 2024 quedan solo $5.20</strong>. Perdimos $1.50 por cada $100 vendidos.</p>
+  <div class="chart-container">
+    <canvas id="chartRentabilidad"></canvas>
+    <div class="chart-conclusion">Cascada de la rentabilidad: cada paso erosiona la utilidad. El paso más doloroso este año fue el de costos.</div>
+  </div>
+
+  <h3>2.3. Endeudamiento y Estructura de Capital</h3>
+  <p>El endeudamiento total subió al 58.2%. El más preocupante es el indicador de <em>cobertura de intereses</em>: en 2024 la utilidad operacional cubre solo 2.4 veces los gastos financieros (bajó de 2.93). <strong>Esto significa que si las ventas cayeran 20% adicional, no alcanzaría para pagar los intereses al banco</strong>.</p>
+  <p>El lado bueno: la relación deuda/EBITDA es 2.38, lo que técnicamente está en zona saludable (los bancos exigen ≤3.0 para refinanciar).</p>
+
+  <h3>2.4. Eficiencia Operativa</h3>
+  <p>Cartera creció 18% mientras las ventas crecieron 7% — eso significa <strong>los clientes están pagando más tarde de lo que crecemos en facturación</strong>. Hay que revisar urgentemente la política de cobranza. Cada día adicional de cartera son ~$13M de plata congelada.</p>
+
+  <h3>2.5. Capacidad Financiera</h3>
+  <p>El margen de contribución es de 43.1% — saludable. Sin embargo, el <em>apalancamiento operativo</em> (sensibilidad de la utilidad a cambios en ventas) es 3.57, lo que significa que <strong>una caída de 10% en ventas reduciría la utilidad operacional en 35.7%</strong>.</p>
+  <p>El punto de equilibrio está en $3.420M de ventas. Con ventas de $4.850M, el margen de seguridad es 29.5% — significa que las ventas pueden caer hasta ese porcentaje antes de entrar en pérdidas.</p>
+  <div class="seccion-estrategica">
+    <h3>Hallazgo clave de capacidad: la flota ociosa</h3>
+    <p>La flota actual tiene capacidad para mover 972.000 ton-km al año, pero solo movió 700.000 — el 72%. <strong>El 28% restante (272.000 ton-km) está sin usar, pero los costos fijos asociados (depreciación, pólizas, parte de salarios) sí se pagan: $412 millones al año "tirados a la basura".</strong></p>
+    <p>Esto equivale al 165% de la utilidad neta de 2024. <strong>Si la empresa lograra subir la utilización al 85%, recuperaría aproximadamente $190M anuales sin invertir un peso adicional.</strong></p>
+  </div>
+
+  <h3>2.6. Productividad</h3>
+  <p>El ingreso por empleado es de $101M anuales — por debajo del promedio del sector transporte ($120M). La utilidad por empleado es $12.2M. Hay espacio para mejorar la productividad antes de pensar en contratar más personal.</p>
+
+  <h2>3. Análisis Sectorial y Posicionamiento</h2>
+  <p>Frente al promedio del sector transporte de carga en Colombia:</p>
+  <table>
+    <tr><th>Indicador</th><th>TransLogística</th><th>Promedio Sector</th><th>Mejor Cuartil</th><th>Posición</th></tr>
+    <tr><td>Margen Bruto</td><td>30.0%</td><td>28.0%</td><td>35.0%</td><td>🟢 Sobre promedio</td></tr>
+    <tr><td>Margen Operacional</td><td>12.1%</td><td>10.0%</td><td>16.0%</td><td>🟢 Sobre promedio</td></tr>
+    <tr><td>ROE</td><td>10.5%</td><td>12.0%</td><td>18.0%</td><td>🟡 Bajo promedio</td></tr>
+    <tr><td>Días cartera</td><td>64</td><td>55</td><td>40</td><td>🟡 Peor que promedio</td></tr>
+    <tr><td>Endeudamiento</td><td>58.2%</td><td>62%</td><td>50%</td><td>🟢 Mejor que promedio</td></tr>
+    <tr><td>Utilización flota</td><td>72%</td><td>78%</td><td>87%</td><td>🟡 Bajo promedio</td></tr>
+  </table>
+  <p><em>Fuentes: Supersociedades SIREM 2023, COLFECAR Informe Sectorial 2024 (datos referenciales).</em></p>
+
+  <h2>4. Sostenibilidad Financiera y Proyección</h2>
+  <div class="seccion-estrategica">
+    <h3>Termómetro de salud estructural</h3>
+    <p>El <strong>Z-Score de Altman</strong> (que combina 5 indicadores en uno solo para predecir riesgo de quiebra) es 1.75 — está en <strong>zona gris</strong>. No es alarmante todavía, pero ya salió de la zona segura (&gt;2.60). Llevamos 3 años cayendo lentamente, hay que actuar antes de entrar en zona de quiebra (&lt;1.10).</p>
+    <h3>Tasa de crecimiento sostenible</h3>
+    <p>La empresa puede crecer hasta 7.4% al año sin pedir más plata prestada ni inyectar capital. Está creciendo a 7.3% en ingresos — justo en el límite. <strong>Si quiere crecer más rápido (por ejemplo, con el proyecto de 3 vehículos nuevos) tendrá que apoyarse en más deuda o aportes de socios</strong>.</p>
+  </div>
+
+  <h2>5. Proyecto de Inversión Evaluado</h2>
+  <p><strong>Propuesta:</strong> Adquirir 3 vehículos nuevos por $1.440M ($1.380M CAPEX + $60M capital de trabajo) para aumentar capacidad y atender demanda creciente.</p>
+  <table>
+    <tr><th>Indicador</th><th>Valor</th><th>Criterio</th><th>Cumple</th></tr>
+    <tr><td>VPN al WACC del 14%</td><td>+$579M</td><td>&gt;0</td><td>🟢</td></tr>
+    <tr><td>TIR</td><td>22.1%</td><td>&gt;WACC (14%)</td><td>🟢</td></tr>
+    <tr><td>TIR Modificada</td><td>17.5%</td><td>&gt;WACC</td><td>🟢</td></tr>
+    <tr><td>Payback descontado</td><td>6.2 años</td><td>≤7 años</td><td>🟢</td></tr>
+    <tr><td>Índice Rentabilidad</td><td>1.40</td><td>&gt;1</td><td>🟢</td></tr>
+  </table>
+  <p><strong>Análisis de sensibilidad:</strong> La variable más crítica es el precio por viaje — si cae más del 12%, el proyecto deja de ser rentable. El segundo factor es la utilización (si cae bajo 65%, también es no viable).</p>
+  <p><strong>Veredicto:</strong> 🟢 <strong>Viable</strong>, pero con dos condiciones críticas:</p>
+  <ol>
+    <li>Primero llevar la flota actual al 85% de utilización (sin invertir un peso más) — esto demuestra que sí hay demanda real para los vehículos adicionales</li>
+    <li>Resolver el problema de liquidez (capital de trabajo negativo) antes de tomar más deuda — la cobertura de intereses ya está en zona roja</li>
+  </ol>
+
+  <h2>6. Riesgos Identificados</h2>
+  <table>
+    <tr><th>Riesgo</th><th>Impacto</th><th>Probabilidad</th><th>Mitigación</th></tr>
+    <tr><td>Iliquidez por capital trabajo negativo</td><td>Alto</td><td>Alta</td><td>Refinanciar deuda CP a LP; mejorar cobranza</td></tr>
+    <tr><td>Cobertura intereses crítica</td><td>Alto</td><td>Media</td><td>Reducir gastos financieros con refinanciación a tasa menor</td></tr>
+    <tr><td>Capacidad ociosa sostenida</td><td>Medio</td><td>Alta</td><td>Plan comercial agresivo, descuentos por volumen, contratos anuales</td></tr>
+    <tr><td>Sin revisor fiscal designado (incumple Ley 43/90)</td><td>Medio</td><td>Alta</td><td>Designación urgente — cumple umbrales de activos</td></tr>
+    <tr><td>Z-Score en zona gris</td><td>Medio</td><td>Media</td><td>Mejorar márgenes y reducir endeudamiento financiero</td></tr>
+  </table>
+
+  <div class="alerta-roja">
+    <strong>⚠️ Alerta de cumplimiento normativo:</strong> La empresa cumple los umbrales del Art. 13 de la Ley 43/90 (activos ≥5.000 SMMLV) y por tanto está OBLIGADA a tener Revisor Fiscal. La ausencia es un incumplimiento que puede generar sanciones de la Supersociedades y compromete la validez de los estados financieros para terceros (bancos, DIAN). <strong>Acción inmediata requerida.</strong>
+  </div>
+
+  <!-- ===================== CAPA 3: ANEXO TÉCNICO ===================== -->
+  <div class="anexo">
+    <h2>7. Anexo Técnico</h2>
+
+    <h3>7.1. Memorias de cálculo de indicadores clave</h3>
+    <table>
+      <tr><th>Indicador</th><th>Fórmula</th><th>Cálculo</th><th>Resultado</th></tr>
+      <tr><td>Razón Corriente</td><td>AC / PC</td><td>1.300 / 1.520</td><td>0.86</td></tr>
+      <tr><td>Capital Trabajo</td><td>AC − PC</td><td>1.300 − 1.520</td><td>−220</td></tr>
+      <tr><td>Margen Neto</td><td>UN / Ventas</td><td>250 / 4.850</td><td>5.15%</td></tr>
+      <tr><td>ROE</td><td>UN / Patrimonio</td><td>250 / 2.380</td><td>10.50%</td></tr>
+      <tr><td>Cobertura Intereses</td><td>UO / Gtos Fin</td><td>585 / 245</td><td>2.39</td></tr>
+      <tr><td>Margen Contribución</td><td>(V−CV) / V</td><td>(4.850−2.760) / 4.850</td><td>43.09%</td></tr>
+      <tr><td>Punto Equilibrio</td><td>CF / MC%</td><td>1.470 / 0.4309</td><td>3.412</td></tr>
+      <tr><td>Apalancamiento Op</td><td>MC / UO</td><td>2.090 / 585</td><td>3.57</td></tr>
+      <tr><td>Z-Score Z''</td><td>6.56·X1+3.26·X2+6.72·X3+1.05·X4</td><td>(ver detalle abajo)</td><td>1.75</td></tr>
+    </table>
+
+    <h3>7.2. Cálculo Z-Score Z'' (no manufactura)</h3>
+    <ul>
+      <li>X1 = WC/AT = -220/5.700 = -0.0386 → contribución: -0.253</li>
+      <li>X2 = UR/AT = 980/5.700 = 0.1719 → contribución: 0.561</li>
+      <li>X3 = EBIT/AT = 585/5.700 = 0.1026 → contribución: 0.690</li>
+      <li>X4 = Pat/Pas = 2.380/3.320 = 0.7169 → contribución: 0.753</li>
+      <li><strong>Z'' = 1.75 — Zona gris (1.10-2.60)</strong></li>
+    </ul>
+
+    <h3>7.3. WACC del proyecto</h3>
+    <p>Ke (CAPM) = Rf(10%) + β(1.0) × Prima(6%) + Riesgo País(2.5%) = <strong>18.5%</strong><br>
+    Kd después de impuestos = 15% × (1−0.35) = <strong>9.75%</strong><br>
+    Estructura: 40% Patrimonio + 60% Deuda<br>
+    <strong>WACC = 0.40 × 18.5% + 0.60 × 9.75% = 14.25% ≈ 14%</strong></p>
+
+    <h3>7.4. Supuestos del proyecto de inversión</h3>
+    <ul>
+      <li>Vehículos: 3 tractomulas usadas seminuevas, $460M c/u + matrículas/seguros iniciales</li>
+      <li>Vida útil: 7 años con valor residual del 15%</li>
+      <li>Factor de utilización proyectado: 80% (vs. 72% actual de la flota)</li>
+      <li>Crecimiento de ingresos en perpetuidad: 3% (inflación largo plazo)</li>
+      <li>Costos variables: 55% de ingresos incrementales</li>
+      <li>Costos fijos incrementales (conductores, mantenimiento): $150M/año</li>
+      <li>Tasa impositiva efectiva: 35%</li>
+    </ul>
+
+    <h3>7.5. Limitaciones del análisis</h3>
+    <ul>
+      <li>Datos del sector son referenciales — un análisis con datos actuales de Supersociedades SIREM puede refinar el benchmarking</li>
+      <li>WACC calculado con Beta sectorial estimada — un cálculo con comparables específicos sería más preciso</li>
+      <li>No se modelaron escenarios de estrés macroeconómico (alza tasa de interés, recesión)</li>
+      <li>No se incluyó análisis tributario detallado por línea (se sugiere análisis específico con revisor fiscal designado)</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">
+  Documento confidencial — TransLogística del Norte S.A.S. 2024 · Distribución restringida a junta directiva y accionistas.<br>
+  Generado por el Sistema Analítico Financiero Multi-Agente · 13 de mayo de 2026
+</div>
+
+<script>
+// Gráfico de Liquidez
+const ctx1 = document.getElementById('chartLiquidez');
+new Chart(ctx1, {
+  type: 'bar',
+  data: {
+    labels: ['2022', '2023', '2024'],
+    datasets: [{
+      label: 'Razón Corriente',
+      data: [0.95, 0.89, 0.86],
+      backgroundColor: ['#eab308', '#dc2626', '#dc2626']
+    }, {
+      label: 'Capital de Trabajo (millones)',
+      data: [-50, -150, -220],
+      backgroundColor: ['#fbbf24', '#f87171', '#dc2626'],
+      yAxisID: 'y1'
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { title: { display: true, text: 'Liquidez en deterioro 2022-2024' } },
+    scales: {
+      y: { type: 'linear', display: true, position: 'left', title: { display: true, text: 'Razón Corriente' } },
+      y1: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Capital Trabajo M$' }, grid: { drawOnChartArea: false } }
+    }
+  }
+});
+
+// Gráfico de Cascada de Rentabilidad
+const ctx2 = document.getElementById('chartRentabilidad');
+new Chart(ctx2, {
+  type: 'bar',
+  data: {
+    labels: ['Ingresos', 'Margen Bruto', 'Margen Operac.', 'Margen Antes Imp.', 'Margen Neto'],
+    datasets: [{
+      label: '% sobre ventas — 2024',
+      data: [100, 30.0, 12.1, 7.7, 5.2],
+      backgroundColor: ['#1e3a8a', '#16a34a', '#eab308', '#eab308', '#dc2626']
+    }, {
+      label: '% sobre ventas — 2023',
+      data: [100, 31.7, 14.3, 10.0, 6.7],
+      backgroundColor: ['#93c5fd', '#86efac', '#fde047', '#fde047', '#fca5a5']
+    }]
+  },
+  options: {
+    plugins: { title: { display: true, text: 'Cascada de la Rentabilidad: 2023 vs 2024' } }
+  }
+});
+</script>
+
+</body>
+</html>

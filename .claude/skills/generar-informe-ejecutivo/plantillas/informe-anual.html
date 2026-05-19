@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Informe Financiero Anual — {{EMPRESA}} — {{ANO}}</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  :root {
+    --verde: #16a34a;
+    --amarillo: #eab308;
+    --rojo: #dc2626;
+    --azul: #1e3a8a;
+    --dorado: #b45309;
+    --gris-claro: #f9fafb;
+    --gris-medio: #6b7280;
+    --gris-oscuro: #111827;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: 'Georgia', 'Segoe UI', serif; margin: 0; color: var(--gris-oscuro); line-height: 1.7; }
+  .cover {
+    background: linear-gradient(180deg, var(--azul) 0%, #1e1b4b 100%);
+    color: white;
+    padding: 100px 60px;
+    text-align: center;
+    page-break-after: always;
+  }
+  .cover h1 { font-size: 42px; margin: 0 0 10px; letter-spacing: 1px; }
+  .cover .subtitle { font-size: 22px; opacity: 0.9; }
+  .cover .empresa { font-size: 30px; margin-top: 60px; color: #fcd34d; }
+  .cover .meta { margin-top: 80px; font-size: 14px; opacity: 0.7; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 60px; }
+  h2 { color: var(--azul); border-bottom: 3px double var(--dorado); padding-bottom: 10px; margin-top: 50px; font-size: 26px; }
+  h3 { color: var(--gris-oscuro); margin-top: 32px; font-size: 18px; }
+  .capa-1 { background: var(--gris-claro); padding: 36px; border-radius: 12px; margin-bottom: 40px; border-top: 6px solid var(--dorado); }
+  .hallazgos li { margin-bottom: 12px; font-size: 16px; }
+  .semaforos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px; margin: 24px 0; }
+  .semaforo-card { background: white; border-radius: 8px; padding: 20px; border-left: 6px solid; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .semaforo-card.verde { border-left-color: var(--verde); }
+  .semaforo-card.amarillo { border-left-color: var(--amarillo); }
+  .semaforo-card.rojo { border-left-color: var(--rojo); }
+  .semaforo-card .nombre { font-size: 12px; color: var(--gris-medio); text-transform: uppercase; letter-spacing: 0.5px; }
+  .semaforo-card .valor { font-size: 30px; font-weight: bold; margin: 8px 0; color: var(--azul); }
+  .recomendaciones { background: #fef3c7; padding: 24px; border-radius: 8px; border-left: 6px solid var(--dorado); margin-top: 20px; }
+  .recomendaciones h3 { margin-top: 0; color: #92400e; }
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
+  th { background: var(--azul); color: white; padding: 12px; text-align: left; }
+  td { padding: 10px; border-bottom: 1px solid #e5e7eb; }
+  .chart-container { margin: 26px 0; padding: 24px; background: var(--gris-claro); border-radius: 8px; }
+  .chart-conclusion { margin-top: 12px; font-style: italic; color: var(--gris-medio); font-size: 14px; }
+  .seccion-estrategica { background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%); color: white; padding: 36px; border-radius: 12px; margin: 30px 0; }
+  .seccion-estrategica h3 { color: #fcd34d; margin-top: 0; }
+  .anexo { background: var(--gris-claro); border: 2px dashed var(--gris-medio); padding: 24px; border-radius: 8px; margin-top: 50px; }
+  .footer { background: var(--gris-oscuro); color: white; padding: 24px 60px; font-size: 12px; text-align: center; }
+  @media print { .cover { page-break-after: always; } .container { padding: 30px; } h2 { page-break-after: avoid; } }
+  /* SELLO — Edith Royero */
+  .sello-header { display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.12); border-radius:8px; padding:8px 14px; margin-top:14px; width:fit-content; }
+  .sello-icono { background:#fcd34d; color:#1e3a8a; border-radius:50%; width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; flex-shrink:0; }
+  .sello-nombre { font-weight:700; color:white; font-size:13px; line-height:1.2; }
+  .sello-cargo { font-size:10px; color:rgba(255,255,255,0.7); letter-spacing:1.5px; text-transform:uppercase; }
+  .sello-footer-wrap { display:flex; align-items:center; justify-content:center; gap:12px; border-top:1px solid rgba(255,255,255,0.15); padding-top:12px; margin-top:10px; }
+  .sello-icono-footer { background:#fcd34d; color:#1e3a8a; border-radius:50%; width:38px; height:38px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; flex-shrink:0; }
+  .sello-footer-nombre { font-size:14px; font-weight:700; color:white; }
+  .sello-footer-cargo { font-size:10px; color:rgba(255,255,255,0.65); letter-spacing:1.5px; }
+  .sello-footer-prep { font-size:11px; color:rgba(255,255,255,0.45); margin-top:2px; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="subtitle">Informe Financiero Anual</div>
+  <h1>{{ANO}}</h1>
+  <div class="empresa">{{EMPRESA}}</div>
+  <div class="meta">
+    NIT {{NIT}} · Sector {{SECTOR}}<br>
+    Emitido: {{FECHA_EMISION}}<br>
+    Sistema Analítico Financiero
+  </div>
+  <div class="sello-header">
+    <div class="sello-icono">ER</div>
+    <div>
+      <div class="sello-nombre">Edith Royero</div>
+      <div class="sello-cargo">Financiera</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- CAPA 1 -->
+  <h2>1. Resumen Ejecutivo</h2>
+  <div class="capa-1">
+    <h3>Mensaje del análisis al accionista</h3>
+    <p>{{MENSAJE_ACCIONISTA}}</p>
+
+    <h3>Hallazgos clave del año</h3>
+    <ul class="hallazgos">
+      <li>{{HALLAZGO_1}}</li>
+      <li>{{HALLAZGO_2}}</li>
+      <li>{{HALLAZGO_3}}</li>
+      <li>{{HALLAZGO_4}}</li>
+      <li>{{HALLAZGO_5}}</li>
+    </ul>
+
+    <h3>Tablero anual</h3>
+    <div class="semaforos">{{TABLERO_SEMAFOROS}}</div>
+
+    <div class="recomendaciones">
+      <h3>Plan recomendado para {{ANO_SIGUIENTE}}</h3>
+      <p>{{PLAN_ANO_SIGUIENTE}}</p>
+    </div>
+  </div>
+
+  <!-- CAPA 2 -->
+  <h2>2. Análisis Financiero Detallado</h2>
+
+  <h3>2.1. Estados financieros — Síntesis</h3>
+  <p>{{SINTESIS_ESTADOS}}</p>
+
+  <h3>2.2. Liquidez y Capital de Trabajo</h3>
+  <p>{{NARRATIVA_LIQUIDEZ}}</p>
+  <div class="chart-container"><canvas id="chartLiquidez"></canvas><div class="chart-conclusion">{{CONC_LIQUIDEZ}}</div></div>
+
+  <h3>2.3. Rentabilidad</h3>
+  <p>{{NARRATIVA_RENTABILIDAD}}</p>
+  <div class="chart-container"><canvas id="chartRentabilidad"></canvas><div class="chart-conclusion">{{CONC_RENTABILIDAD}}</div></div>
+
+  <h3>2.4. Endeudamiento y Estructura de Capital</h3>
+  <p>{{NARRATIVA_ENDEUDAMIENTO}}</p>
+
+  <h3>2.5. Eficiencia Operativa</h3>
+  <p>{{NARRATIVA_EFICIENCIA}}</p>
+
+  <h3>2.6. Capacidad Financiera</h3>
+  <p>{{NARRATIVA_CAPACIDAD}}</p>
+
+  <h3>2.7. Productividad</h3>
+  <p>{{NARRATIVA_PRODUCTIVIDAD}}</p>
+
+  <h2>3. Análisis Sectorial y Posicionamiento</h2>
+  <p>{{NARRATIVA_SECTOR}}</p>
+  <div class="chart-container"><canvas id="chartSector"></canvas><div class="chart-conclusion">{{CONC_SECTOR}}</div></div>
+
+  <h2>4. Sostenibilidad Financiera y Proyección</h2>
+  <div class="seccion-estrategica">
+    <h3>Indicadores estructurales</h3>
+    <p>{{NARRATIVA_SOSTENIBILIDAD}}</p>
+    <h3>Proyección 3 años</h3>
+    <p>{{PROYECCION_3_ANOS}}</p>
+  </div>
+
+  <h2>5. Riesgos Identificados</h2>
+  <table>
+    <tr><th>Riesgo</th><th>Impacto</th><th>Probabilidad</th><th>Mitigación</th></tr>
+    {{FILAS_RIESGOS}}
+  </table>
+
+  <!-- CAPA 3 -->
+  <div class="anexo">
+    <h2>6. Anexo Técnico</h2>
+    <h3>Estados financieros completos</h3>
+    {{TABLA_ESTADOS}}
+    <h3>Memorias de cálculo</h3>
+    {{MEMORIAS_CALCULO}}
+    <h3>Supuestos</h3>
+    {{LISTA_SUPUESTOS}}
+  </div>
+</div>
+
+<div class="footer">
+  Documento confidencial — {{EMPRESA}} {{ANO}} · Distribución restringida a junta directiva y accionistas.
+  <div class="sello-footer-wrap">
+    <div class="sello-icono-footer">ER</div>
+    <div>
+      <div class="sello-footer-nombre">Edith Royero</div>
+      <div class="sello-footer-cargo">Financiera</div>
+      <div class="sello-footer-prep">Análisis preparado y certificado por</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Inicialización de gráficos — los datos se inyectan al generar el informe
+</script>
+
+</body>
+</html>
