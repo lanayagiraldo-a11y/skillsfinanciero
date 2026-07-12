@@ -1,7 +1,10 @@
-# Sistema Analítico Financiero — Transportes La Carolina
+# Sistema Analítico Financiero Multi-Agente
 
 Sistema multi-agente de análisis financiero construido sobre Claude Code (Anthropic).
 Diseñado para análisis de junta directiva y accionistas en lenguaje claro, sin tecnicismos.
+
+**Instalable en cualquier empresa:** los agentes son genéricos. Cada empresa se configura
+sola con su carpeta en `empresas/<nombre-empresa>/`, donde quedan sus análisis por período.
 
 ## Estructura del sistema
 
@@ -64,7 +67,7 @@ Los informes HTML incluyen:
 - Árbol de rentabilidad operativa horizontal (estilo DuPont)
 - Gráficos interactivos con Chart.js
 - Lenguaje para accionistas sin formación financiera
-- Sello de autoría: **Edith Royero | Financiera**
+- Sello de autoría configurable por empresa (ej.: **Edith Royero | Financiera**)
 
 ## Uso
 
@@ -73,4 +76,4 @@ Adjunta el archivo Excel con los estados financieros o indicadores precalculados
 
 ---
 
-*Sistema analítico diseñado para Transportes La Carolina · Edith Royero — Financiera*
+*Sistema analítico multi-agente · Edith Royero — Financiera · Origen: Transportes La Carolina*
